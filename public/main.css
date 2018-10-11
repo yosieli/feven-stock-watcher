@@ -1,0 +1,41 @@
+#stockSymbolTextField{
+    background-image: url('images/icons8-search-32.png');
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: left;
+    font-size: 16px;
+    width:300px;
+    padding: 12px 5px 12px 5px;
+    border: 2px solid grey;
+    outline-color:lightblue;
+    text-indent: 30px;
+    position: relative;
+    top: 50%;
+
+}
+#stockSymbolDIvision{
+    background-image: url('images/wallstreet.gif');
+    background-size: cover;
+    height:400px ;
+    text-align: center;
+
+}
+/*
+*table
+*/
+#stockTableDivision{
+    padding: 25px 150px 25px 150px;
+    
+}
+table{
+    width: 100%;
+    padding: 50px 50px 50px 50px;
+    background-color:white;
+}
+td{
+    border-bottom: 1px solid rgb(180, 180, 180);
+}
+tr:hover{
+    background-color: lightblue;
+
+}
