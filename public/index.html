@@ -9,6 +9,10 @@
         <script src="main.js"></script>
     </head>
     <body>
+      <div id="buttonBar">
+        <button id="loginButton" type="button" class="buttonClass" onclick="loginButtonClicked(event)" >login</button>
+        <button id="SignUpButton" type="button" class="buttonClass" onclick="signUpButton(event)">signup</button>
+      </div>
       
       <div id="stockSymbolDIvision">
           
@@ -21,5 +25,19 @@
         </table>
 
       </div> 
+
+      <div>
+        <dialog id="signUpDialog">
+          <div class="dialogTextBoxBox"> 
+               <input type="text" id="signUpIdTextBox" placeholder="Enter Login Id you would like to use">
+          </div>
+          <div class="dialogButtonBar">
+            <button type="button" class="buttonClass" onclick="signUpDialogSignUpButtonClicked(event)">Sign Up</button>
+            <button type="cancel" class="buttonClass" onclick="signUpDialogCancelButtonClicked(event)">Cancel</button>
+            
+          </div>
+        </dialog>
+      </div>
     </body>
+
 </html>

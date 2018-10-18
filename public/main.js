@@ -1,3 +1,4 @@
+/*
 var person= {
     firstName:"luis",
     lastName:"vega",
@@ -9,7 +10,60 @@ var person= {
 var theLastname=person.lastName;
 person.walk();
 console.log(theLastname);
+*/
 
+
+
+/*** 
+ * signup
+ */
+
+ function signUpButton(event){
+    // alert("will show sign up dialog here");
+    showSignUpDialog();
+ }
+
+ function showSignUpDialog(){
+     document.getElementById("signUpDialog").showModal();
+ }
+
+ function signUpDialogSignUpButtonClicked(){
+       alert("Will sign up");
+       var loginIdString=document.getElementById('signUpIdTextBox').value;
+       var stockSymbol=document.getElementById('stockSymbolTextField').value;
+       var webServiceRequest=new XMLHttpRequest();
+       webServiceRequest.open("POST","/rest/signup");
+       webServiceRequest.setRequestHeader("Content-Type","application/json");
+       webServiceRequest.onload=function(){
+           if(this.status===200){
+               alert("Got 200!");
+           }
+           else{
+               alert("Some error ocurred.Maybe login id already exists.");
+           }
+           }
+       
+
+       var jsonObject={
+           "loginId":loginIdString,
+           "stockSymbol":stockSymbol
+       }
+
+       var jsonString=JSON.stringify(jsonObject);
+       webServiceRequest.send(jsonString);
+
+
+
+
+ }
+
+ function signUpDialogCancelButtonClicked(){
+     document.getElementById("signUpDialog").close();
+ }
+
+ //
+ // stock symbol search box
+ //
 
 function stockSymbolSearchBoxKeyPressed(keyboardEvent){
     if(keyboardEvent.key==="Enter"){
@@ -34,35 +88,19 @@ function stockSymbolSearchBoxKeyPressed(keyboardEvent){
 
             var stockInformation=JSON.parse(this.responseText);
 
-            alert(stockInformation.symbol);
-            alert(stockInformation.companyName);
+           /* alert(stockInformation.symbol);
+            alert(stockInformation.companyName);*/
 
             var tableElemet=document.getElementById("stockTable");
            
             while(tableElemet.rows.length >=1){
                 tableElemet.deleteRow(0);
             }
-            var row=tableElemet.insertRow();
-            row.insertCell().innerHTML="stock Symbol";
-            row.insertCell().innerHTML=stockInformation.symbol;
-
-            row=tableElemet.insertRow();
-            row.insertCell().innerHTML="company Name";
-            row.insertCell().innerHTML=stockInformation.companyName;
-
-            row=tableElemet.insertRow();
-            row.insertCell().innerHTML="Latest Price";
-            row.insertCell().innerHTML=stockInformation.latestPrice;
-
-            row=tableElemet.insertRow();
-            row.insertCell().innerHTML="Primary Exchange";
-            row.insertCell().innerHTML=stockInformation.primaryExchange;
-
-            row=tableElemet.insertRow();
-            row.insertCell().innerHTML="Sector";
-            row.insertCell().innerHTML=stockInformation.sector;
-
-
+            insertRow(tableElemet,"stock Symbol",stockInformation.symbol);
+            insertRow(tableElemet,"company Name",stockInformation.companyName);
+            insertRow(tableElemet,"Latest Price",stockInformation.latestPrice);
+            insertRow(tableElemet,"Primary Exchange",stockInformation.primaryExchange);
+            insertRow(tableElemet,"Sector",stockInformation.sector);
 
 
 
@@ -75,3 +113,9 @@ function stockSymbolSearchBoxKeyPressed(keyboardEvent){
         
     }
 
+
+    function insertRow(tableElement,cell1Text,cell2Text){
+        var row=tableElement.insertRow();
+        row.insertCell().innerHTML=cell1Text;
+        row.insertCell().innerHTML=cell2Text;
+    }
