@@ -1,22 +1,20 @@
-/*
-var person= {
-    firstName:"luis",
-    lastName:"vega",
-    walk:function(){
-        console.log("I am wlaking");
-    }
-}
-
-var theLastname=person.lastName;
-person.walk();
-console.log(theLastname);
-*/
-
-
 
 /*** 
  * signup
  */
+
+ function disableSignUpButton(){
+     var signUpButton=document.getElementById("SignUpButton");
+     signUpButton.disabled=true;
+     signUpButton.style.borderColor="grey";
+ }
+
+ function enableSignUpButton(){
+    var signUpButton=document.getElementById("SignUpButton");
+    signUpButton.disabled=false;
+    signUpButton.style.borderColor="black";
+
+ }
 
  function signUpButton(event){
     // alert("will show sign up dialog here");
@@ -24,11 +22,12 @@ console.log(theLastname);
  }
 
  function showSignUpDialog(){
+     document.getElementById("signUpIdTextBox").value=null;
      document.getElementById("signUpDialog").showModal();
  }
 
  function signUpDialogSignUpButtonClicked(){
-       alert("Will sign up");
+      // alert("Will sign up");
        var loginIdString=document.getElementById('signUpIdTextBox').value;
        var stockSymbol=document.getElementById('stockSymbolTextField').value;
        var webServiceRequest=new XMLHttpRequest();
@@ -36,7 +35,9 @@ console.log(theLastname);
        webServiceRequest.setRequestHeader("Content-Type","application/json");
        webServiceRequest.onload=function(){
            if(this.status===200){
-               alert("Got 200!");
+               //alert("Got 200!");
+               document.getElementById("signUpDialog").close();
+               userLoggedIn(loginIdString);
            }
            else{
                alert("Some error ocurred.Maybe login id already exists.");
@@ -59,6 +60,50 @@ console.log(theLastname);
 
  function signUpDialogCancelButtonClicked(){
      document.getElementById("signUpDialog").close();
+     
+ }
+
+ //
+ //login dialog
+ //
+ function loginButtonClicked(){
+     var loginButtonText=document.getElementById("loginButton").innerHTML;
+     if(loginButtonText==='logout'){
+         userLoggedOut();
+     }else{
+         //alert('will  show login dialog');
+         showLoginDialog();
+
+     }
+
+     }
+     function showLoginDialog(){
+        document.getElementById("loginIdTextBox").value=null;
+         document.getElementById("loginDialog").showModal();
+         
+     }
+     function loginDialogCancelButtonClicked(){
+         document.getElementById("loginDialog").close();
+     }
+
+ //
+ //login status
+ //
+
+ function userLoggedOut(){
+     document.getElementById("loggedInAs").style.visibility="hidden";
+     document.getElementById("loginButton").innerHTML='login';
+     enableSignUpButton();
+
+     document.getElementById("stockSymbolTextField").value=null;
+     document.getElementById("stockTable").style.visibility="hidden";
+
+ }
+ function userLoggedIn(theloginId){
+     document.getElementById("loggedInAs").style.visibility="visible";
+     document.getElementById("loginId").innerHTML=theloginId;
+     document.getElementById("loginButton").innerHTML='logout';
+     disableSignUpButton();
  }
 
  //
@@ -68,9 +113,11 @@ console.log(theLastname);
 function stockSymbolSearchBoxKeyPressed(keyboardEvent){
     if(keyboardEvent.key==="Enter"){
         //get price form a web service
+        
         console.log("Enter was pressed");
         var stockSymbol=keyboardEvent.target.value;
         getAndDisplayStockDate(stockSymbol);
+        
 
     }
 }
@@ -92,6 +139,7 @@ function stockSymbolSearchBoxKeyPressed(keyboardEvent){
             alert(stockInformation.companyName);*/
 
             var tableElemet=document.getElementById("stockTable");
+             tableElemet.style.visibility="visible";
            
             while(tableElemet.rows.length >=1){
                 tableElemet.deleteRow(0);

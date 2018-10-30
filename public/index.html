@@ -10,13 +10,14 @@
     </head>
     <body>
       <div id="buttonBar">
+        <p id="loggedInAs">LOGGED IN AS <span id="loginId">login id goes here</span></p>
         <button id="loginButton" type="button" class="buttonClass" onclick="loginButtonClicked(event)" >login</button>
         <button id="SignUpButton" type="button" class="buttonClass" onclick="signUpButton(event)">signup</button>
       </div>
       
       <div id="stockSymbolDIvision">
           
-        <input type="text" id="stockSymbolTextField" placeholder="enter stock symbol" onkeypress="stockSymbolSearchBoxKeyPressed(event)">
+        <input type="text" id="stockSymbolTextField" placeholder="enter stock symbol" onkeypress="stockSymbolSearchBoxKeyPressed(event)" required>
       </div>
       <div id="stockTableDivision">
         <table id="stockTable">
@@ -29,11 +30,23 @@
       <div>
         <dialog id="signUpDialog">
           <div class="dialogTextBoxBox"> 
-               <input type="text" id="signUpIdTextBox" placeholder="Enter Login Id you would like to use">
+               <input type="text" id="signUpIdTextBox" placeholder="Enter Login Id you would like to use" required>
           </div>
           <div class="dialogButtonBar">
             <button type="button" class="buttonClass" onclick="signUpDialogSignUpButtonClicked(event)">Sign Up</button>
             <button type="cancel" class="buttonClass" onclick="signUpDialogCancelButtonClicked(event)">Cancel</button>
+            
+          </div>
+        </dialog>
+      </div>
+      <div>
+        <dialog id="loginDialog">
+          <div class="dialogTextBoxBox"> 
+               <input type="text" id="loginIdTextBox" placeholder="Enter your login id" required>
+          </div>
+          <div class="dialogButtonBar">
+            <button type="button" class="buttonClass" onclick="loginDialogloginButtonClicked(event)">Login</button>
+            <button type="cancel" class="buttonClass" onclick="loginDialogCancelButtonClicked(event)">Cancel</button>
             
           </div>
         </dialog>

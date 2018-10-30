@@ -3,6 +3,17 @@
     padding: 15px 0px 15px 15px;
 }
 
+#loggedInAs{
+    display: inline;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 12px;
+    padding: 5px;
+    visibility: hidden;
+}
+#loginId{
+    font-size:24px;
+    
+}
 .buttonClass{
     border: 2px solid black;
     border-radius: 4px;
@@ -81,7 +92,7 @@ dialog::backdrop{
 .dialogTextBoxBox{
     text-align: center;
 }
-#signUpIdTextBox{
+#signUpIdTextBox,#loginIdTextBox{
     width: 300px;
     font-size: 16px;
     padding: 12px 5px 12px 5px;
