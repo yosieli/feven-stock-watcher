@@ -6,11 +6,14 @@
         <title>Stock Watcher</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        <!-- NEW CODE BEGIN -->
+		<script src= "Chart.bundle.js"> </script>
+    <!-- NEW CODE END -->
         <script src="main.js"></script>
     </head>
     <body>
       <div id="buttonBar">
-        <p id="loggedInAs">LOGGED IN AS <span id="loginId">login id goes here</span></p>
+        <p id="loggedInAs">LOGGED IN AS <span id="loginId"></span></p>
         <button id="loginButton" type="button" class="buttonClass" onclick="loginButtonClicked(event)" >login</button>
         <button id="SignUpButton" type="button" class="buttonClass" onclick="signUpButton(event)">signup</button>
       </div>
@@ -26,6 +29,10 @@
         </table>
 
       </div> 
+      <div id="stockChartDivision" class="searchResultDivisionClass">
+        <canvas id="stockChartCanvas"> 
+        </canvas>
+    </div>
 
       <div>
         <dialog id="signUpDialog">
@@ -45,7 +52,7 @@
                <input type="text" id="loginIdTextBox" placeholder="Enter your login id" required>
           </div>
           <div class="dialogButtonBar">
-            <button type="button" class="buttonClass" onclick="loginDialogloginButtonClicked(event)">Login</button>
+            <button type="button" class="buttonClass" onclick="loginDialogLoginButtonClicked(event)">Login</button>
             <button type="cancel" class="buttonClass" onclick="loginDialogCancelButtonClicked(event)">Cancel</button>
             
           </div>

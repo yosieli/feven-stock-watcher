@@ -49,8 +49,10 @@
 /*
 *table
 */
-#stockTableDivision{
-    padding: 25px 150px 25px 150px;
+#stockTableDivision, #stockChartDivision {
+    
+        padding: 25px 150px 25px 150px;
+
     
 }
 table{

@@ -10,7 +10,66 @@ server.use(express.static('public'));
 server.use(bodyParser.json());
 
 server.post("/rest/signup",processSignUpRequest);
+server.get("/rest/login/:loginId",processLoginRequest);
+server.post("/rest/updateStockSymbol",processUpdateStockSymbol);
 server.listen(port,serverListener);
+
+function processUpdateStockSymbol(httpRequestObject,httpResponseObject){
+    var loginId=httpRequestObject.body.loginId;
+    var stockSymbol=httpRequestObject.body.stockSymbol;
+    console.log("loginId is:" + loginId);
+    console.log("stockSymbol is:" + stockSymbol);
+
+    var sqlString="update  \"stock-watcher-users\" set stock_symbol= '" + stockSymbol + "'where login_id = '" + loginId + "'";
+    console.log(sqlString);
+
+    postgresClient.query(sqlString,function(error,result){
+        if(error){
+            console.log(error);
+            httpResponseObject.statusCode=500;
+            httpResponseObject.end();
+
+        }
+        else{
+            console.log(result);
+            httpResponseObject.status=200;
+            httpResponseObject.end();
+        }
+    });
+
+
+}
+
+function processLoginRequest(httpRequestObject,httpResponseObject){
+    //url example:/rest/login/luis
+    var loginId=httpRequestObject.param("loginId");
+    var sqlString="SELECT * from  \"stock-watcher-users\"  where login_id='"+ loginId +"'";
+
+    postgresClient.query(sqlString,function(error,result){
+        if(error){
+            console.log(error);
+            httpResponseObject.status=500;
+            httpResponseObject.end();
+        }else{
+            console.log(result);
+            if(result.rowCount ===1){
+                //we found the users login id!
+                var responseObject=result.rows[0];
+                var jsonString =JSON.stringify(responseObject);
+                jsonString=jsonString.replace("login_id","loginId").replace("stock_symbol","stockSymbol");
+
+                httpResponseObject.statusCode=200;
+                httpResponseObject.end(jsonString);
+
+            }else{
+                //we didn't find the user's login id
+                httpResponseObject.status=500;
+                httpResponseObject.end();
+            }
+
+        }
+    });
+}
 
 function processSignUpRequest(httpRequestObject,httpResponseObject){
     var loginId=httpRequestObject.body.loginId;
