@@ -335,4 +335,5 @@ function getYAxisPricesPrices(stockPricesArray)
 }
 
 var chartObject; 
+
 //new code ends//

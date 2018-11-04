@@ -9394,8 +9394,7 @@
              */
             dataElementType: null,
     
-            initialize: funct
-    ion(chart, datasetIndex) {
+            initialize: function(chart, datasetIndex) {
                 var me = this;
                 me.chart = chart;
                 me.index = datasetIndex;
@@ -18546,8 +18545,8 @@
         for (i = 0; i < ilen; i++) {
             momentDate = momentify(data[i], timeOpts);
             if (momentDate.millisecond() !== 0) {
-                return 'MMM D, Y
-    YYY h:mm:ss.SSS a';
+                return 'MMM D, YYYY h:mm:ss.SSS a';
+   
             }
             if (momentDate.second() !== 0 || momentDate.minute() !== 0 || momentDate.hour() !== 0) {
                 hasTime = true;
