@@ -96,11 +96,13 @@
                  var responseObject=JSON.parse(webServiceRequest.responseText);
                  var stockSymbol=responseObject.stockSymbol;
                  userLoggedIn(loginID);
-                 if(stockSymbol.length > 0){
+                 if(stockSymbol.length > 0 && loginID.length > 0){
                      document.getElementById("stockSymbolTextField").value=stockSymbol;
                      getAndDisplayStockDate(stockSymbol);
                     
                  }
+                 
+                 
              }else{
                  alert("unable to login.Maybe login id is incorrect");
              }
@@ -129,18 +131,24 @@
 
  }
  function userLoggedIn(theloginId){
+     
      document.getElementById("loggedInAs").style.visibility="visible";
-     document.getElementById("loginId").innerHTML=theloginId;
+     document.getElementById("loginId").innerHTML=theloginId;//span user logged in as
      document.getElementById("loginButton").innerHTML='logout';
      disableSignUpButton();
- }
+    }
+    
+       
+
+ 
 
  function isUserLoggedIn(){
      var loggedInId=document.getElementById("loginId").innerHTML;
      if(loggedInId.length !=0){
          return true;
      }else{
-         return false;
+        return false; 
+         //alert("  please enter  stock symbol");
      }
  }
  function getLoggedInUserId(){
@@ -297,6 +305,7 @@ function drawHistoricalPricesChart(stockSymbol, stockPricesArray) {
                 fill: false,
             }]
         }
+    
     };
    
     // display the stock chart container in case it is hidden
